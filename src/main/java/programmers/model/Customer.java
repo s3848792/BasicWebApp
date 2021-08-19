@@ -3,21 +3,38 @@ package programmers.model;
 import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity
-public class Account{
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String accountID;
-    private String desc;
+    private int age;
 
     private Date created_at;
     private Date updated_at;
 
-    public Account(){
+    public Customer() {
 
+    }
+
+    @PrePersist
+    protected void onCreate(){
+        this.created_at = new Date();
+
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updated_at = new Date();
+
+    }
+
+    public Customer(Long id, String name, int age, Date created_at, Date updated_at) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
     }
 
     public Long getId() {
@@ -36,20 +53,12 @@ public class Account{
         this.name = name;
     }
 
-    public String getAccountID() {
-        return accountID;
+    public int getAge() {
+        return age;
     }
 
-    public void setAccountID(String accountID) {
-        this.accountID = accountID;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public Date getCreated_at() {
